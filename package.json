@@ -1,0 +1,46 @@
+{
+  "name": "apib",
+  "version": "0.0.2",
+  "description": "An API basic client.",
+  "main": "dist/apib.js",
+  "scripts": {
+    "test": "mocha",
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/z9i/apib.git"
+  },
+  "keywords": [
+    "api",
+    "axios",
+    "apib"
+  ],
+  "author": "z9i",
+  "contributors": [
+    "xovel"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/z9i/apib/issues"
+  },
+  "homepage": "https://github.com/z9i/apib#readme",
+  "dependencies": {
+    "axios": "^0.19.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-classes": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "eslint": "^6.1.0",
+    "eslint-config-zob": "0.0.4",
+    "eslint-plugin-zob": "0.0.2",
+    "mocha": "^6.2.0",
+    "rollup": "^1.17.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-uglify": "^6.0.2"
+  }
+}

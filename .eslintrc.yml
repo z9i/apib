@@ -1,0 +1,11 @@
+plugins:
+  - zob
+
+extends:
+  - zob
+
+env:
+  mocha: true
+
+rules:
+  zob/comment: 2
