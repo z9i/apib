@@ -6,7 +6,7 @@
 
   axios = axios && axios.hasOwnProperty('default') ? axios['default'] : axios;
 
-  var version = "0.0.3";
+  var version = "0.0.4";
 
   var API =
   /*#__PURE__*/
@@ -125,66 +125,11 @@
       }
 
       return result;
-    }
-    /**
-     * 通用请求封装
-     */
+    } // 需要自行实现 request 方法，基础方法不再进行提供
     ;
 
     _proto.request = function request() {
-      var _this = this;
-
-      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
-      }
-
-      var options = this._args(args, ['url']);
-
-      if (!options.url) {
-        throw new Error('url is required');
-      }
-
-      if (!options.method && this.options.method) {
-        options.method = this.options.method;
-      }
-
-      var successCode = typeof this.options.code === 'number' ? this.options.code : 1;
-      return new Promise(function (resolve, reject) {
-        _this.axios.create({
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          baseURL: _this.options.baseUrl,
-          timeout: _this.options.timeout
-        })(options).then(function (response) {
-          var res = response.data || {};
-          var code = +res.code;
-
-          if (code === successCode) {
-            resolve(res);
-          } else {
-            reject(res);
-          }
-
-          _this.log('then', {
-            response: response,
-            args: args,
-            options: options,
-            res: res,
-            raw: JSON.stringify(res)
-          });
-        })["catch"](function (error) {
-          reject(error);
-
-          _this.log('catch', {
-            error: error,
-            args: args,
-            options: options,
-            response: error.response
-          });
-        });
-      });
+      throw new Error('Not implemented yet');
     };
 
     return API;
