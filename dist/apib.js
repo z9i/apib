@@ -2,15 +2,13 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('axios')) :
   typeof define === 'function' && define.amd ? define(['axios'], factory) :
   (global = global || self, global.apib = factory(global.axios));
-}(this, function (axios) { 'use strict';
+}(this, (function (axios) { 'use strict';
 
-  axios = axios && axios.hasOwnProperty('default') ? axios['default'] : axios;
+  axios = axios && Object.prototype.hasOwnProperty.call(axios, 'default') ? axios['default'] : axios;
 
-  var version = "0.0.4";
+  var version = "0.1.0";
 
-  var API =
-  /*#__PURE__*/
-  function () {
+  var API = /*#__PURE__*/function () {
     function API() {
       var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       this.axios = axios;
@@ -36,11 +34,20 @@
     ;
 
     _proto._param = function _param(data) {
-      var ret = [];
+      // https://jsperf.com/array-push-vs-string-concat
+
+      /*
+      let ret = []
+      Object.keys(data).forEach(v => {
+        ret.push(`${encodeURIComponent(v)}=${encodeURIComponent(data[v])}`)
+      })
+      return ret.join('&')
+      */
+      var ret = '';
       Object.keys(data).forEach(function (v) {
-        ret.push("".concat(encodeURIComponent(v), "=").concat(encodeURIComponent(data[v])));
+        ret = ret + "".concat(encodeURIComponent(v), "=").concat(encodeURIComponent(data[v]), "&");
       });
-      return ret.join('&');
+      return ret.slice(0, -1);
     }
     /**
      * 类型判断
@@ -51,8 +58,10 @@
     ;
 
     _proto._type = function _type(unknown) {
-      var type = Object.prototype.toString.call(unknown);
-      return type.replace('[object ', '').replace(']', '').toLowerCase();
+      var type = Object.prototype.toString.call(unknown); // https://jsperf.com/replace-vs-slice/5
+      // return type.replace('[object ', '').replace(']', '').toLowerCase()
+
+      return type.slice(8, -1).toLowerCase();
     }
     /**
      * 将参数列表转为对象形式
@@ -81,8 +90,8 @@
 
           try {
             options[name] = JSON.parse(temp.slice(1).join('='));
-          } catch (e) {} //
-          // const [name, ...value] = item.split('=')
+          } catch (e) {// ignore
+          } // const [name, ...value] = item.split('=')
           // names[index] = name
           // try {
           //   options[name] = JSON.parse(value.join('='))
@@ -107,7 +116,7 @@
     /**
      * 拼接链接地址
      *
-     * @param  {array<string>} args
+     * @param {array<string>} args
      */
     ;
 
@@ -137,5 +146,5 @@
 
   return API;
 
-}));
+})));
 //# sourceMappingURL=apib.js.map
