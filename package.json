@@ -1,6 +1,6 @@
 {
   "name": "apib",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "An API basic client.",
   "main": "dist/apib.js",
   "scripts": {
@@ -14,7 +14,6 @@
   },
   "keywords": [
     "api",
-    "axios",
     "apib"
   ],
   "author": "z9i",
@@ -26,9 +25,6 @@
     "url": "https://github.com/z9i/apib/issues"
   },
   "homepage": "https://github.com/z9i/apib#readme",
-  "dependencies": {
-    "axios": "^0.21.1"
-  },
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
